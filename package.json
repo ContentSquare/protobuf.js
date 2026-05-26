@@ -1,5 +1,5 @@
 {
-  "name": "protobufjs",
+  "name": "@contentsquare/protobufjs",
   "version": "8.4.2",
   "versionScheme": "~",
   "description": "Protocol Buffers for JavaScript & TypeScript.",
@@ -18,6 +18,14 @@
   ],
   "main": "index.js",
   "type": "commonjs",
+  "exports": {
+    ".": "./index.js",
+    "./light": "./light.js",
+    "./minimal": "./minimal.js",
+    "./ext/descriptor": "./ext/descriptor.js",
+    "./ext/textformat": "./ext/textformat.js",
+    "./google/*": "./google/*"
+  },
   "types": "index.d.ts",
   "browser": {
     "fs": false
