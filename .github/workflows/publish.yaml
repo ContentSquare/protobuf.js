@@ -1,0 +1,39 @@
+name: Publish to CodeArtifact
+
+on:
+  workflow_dispatch:
+    branches:
+      - master
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu24-small
+    steps:
+      - uses: ContentSquare/actions-checkout@approved-v6
+
+      - name: 📦 Setup Node.js
+        uses: ContentSquare/actions-setup-node@approved-v6
+        with:
+          node-version: 24
+
+      - name: Configure AWS credentials
+        uses: ContentSquare/aws-actions-configure-aws-credentials@approved-v4
+        with:
+          role-to-assume: arn:aws:iam::248230147984:role/github-runners
+          aws-region: eu-west-1
+
+      - name: Authenticate to CodeArtifact
+        uses: ContentSquare/action-create-npmrc-yarnrc@v3
+
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish
+        run: npm publish --ignore-scripts
