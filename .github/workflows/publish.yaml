@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu24-small
+    runs-on: ubuntu-latest
     steps:
       - uses: ContentSquare/actions-checkout@approved-v6
 
